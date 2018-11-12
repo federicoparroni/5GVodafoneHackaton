@@ -15,6 +15,8 @@ sensor_type = "ACCELEROMETER_3D"
 sensor_position = "0x0289FE5F"
 plot_range_sec = 10
 
+count=9
+
 ###########################################
 # MAIN SCRIPT
 ###########################################
@@ -65,6 +67,76 @@ for msg in consumer:
         # Sensor data provided
         elif protobuf_message.type == protobuf.Message.DEVICE_SENSOR_OUTPUT:
             if protobuf_message.device_sensor_output.sensor.type == 0:
+                if protobuf_message.device_sensor_output.sensor.position == 0x02a3fdaf:
+                    if dict["L_FOR"] == []:
+                        count += 1
+                    dict["L_FOR"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x0283fdaf:
+                    if dict["R_FOR"] == []:
+                        count += 1
+                    dict["R_FOR"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x02a1fe5f:
+                    if dict["L_ARM"] == []:
+                        count += 1
+                    dict["L_ARM"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x0281fe5f:
+                    if dict["R_ARM"] == []:
+                        count += 1
+                    dict["R_ARM"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x0268fe8f:
+                    if dict["L_SHC"] == []:
+                        count += 1
+                    dict["L_SHC"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x0268fc8f:
+                    if dict["R_SHC"] == []:
+                        count += 1
+                    dict["R_SHC"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x0289fe5f:
+                    if dict["R_THG"] == []:
+                        count += 1
+                    dict["R_THG"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x02a9fe5f:
+                    if dict["L_THG"] == []:
+                        count += 1
+                    dict["L_THG"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+                if protobuf_message.device_sensor_output.sensor.position == 0x026afd8f:
+                    if dict["L5"] == []:
+                        count += 1
+                    dict["L5"] = [protobuf_message.device_sensor_output.accelerometer_3D.x_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
+                                     protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
+            if count == 9:
+                count = 0
+                dict = {
+                    "L5": [],
+                    "R_THG": [],
+                    "L_THG": [],
+                    "L_FOR": [],
+                    "L_ARM": [],
+                    "L_SHC": [],
+                    "R_FOR": [],
+                    "R_ARM": [],
+                    "R_SHC": []
+                }
+                
+
+
                 #if protobuf_message.device_sensor_output.sensor.position == 0x0268FE8F:
                 #    dict["L_SHC"] =
                 # if protobuf_message.device_sensor_output.sensor.position == 0x
