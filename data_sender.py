@@ -4,6 +4,7 @@ from utilities.getUserUUID import Num2Partition
 from utilities.sensor_code_converter import sensor_code_converter
 import sensor
 import matplotlib.pyplot as plt
+import classifier
 
 ###########################################
 # VIEWER PARAMETERS
@@ -122,6 +123,7 @@ for msg in consumer:
                                      protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
                                      protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
             if count == 9:
+                print('daaiii')
                 count = 0
                 dict = {
                     "L5": [],
@@ -134,13 +136,14 @@ for msg in consumer:
                     "R_ARM": [],
                     "R_SHC": []
                 }
+                #classifier.get_status()
                 
 
 
                 #if protobuf_message.device_sensor_output.sensor.position == 0x0268FE8F:
                 #    dict["L_SHC"] =
                 # if protobuf_message.device_sensor_output.sensor.position == 0x
-                print(protobuf_message)
+                #print(protobuf_message)
                 # new_data_sensor_type = sensor_code_converter(protobuf_message.device_sensor_output.sensor.type)
                 # new_data_sensor_position = protobuf_message.device_sensor_output.sensor.position
                 # this_sensor = sensor.sensor(new_data_sensor_type, new_data_sensor_position)
@@ -149,4 +152,4 @@ for msg in consumer:
                 #     if my_sensor.redraw():  # update plot
                 #         plt.draw()
                 #         plt.pause(0.001)
-                a = 1
+                #a = 1
