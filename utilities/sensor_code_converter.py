@@ -1,0 +1,32 @@
+def sensor_code_converter(sensor_proto_number):
+    sensor_map = dict()
+
+    sensor_map[0] = "ACCELEROMETER_3D"
+    sensor_map[1] = "BAROMETER"
+    sensor_map[2] = "ELECTROCARDIOGRAM_1_CH"
+    sensor_map[3] = "ELECTROCARDIOGRAM_8_CH"
+    sensor_map[4] = "ELECTROENCEPHALOGRAM_1_CH"
+    sensor_map[5] = "ELECTROENCEPHALOGRAM_2_CH"
+    sensor_map[6] = "ELECTROMYOGRAM_1_CH"
+    sensor_map[7] = "ELECTROOCULOGRAM_1_CH"
+    sensor_map[8] = "ELECTROOCULOGRAM_2_CH"
+    sensor_map[9] = "EXTERNAL_SYNC_SIGNAL"
+    sensor_map[10] = "GPS_ACCURACY"
+    sensor_map[11] = "GPS_ALTITUDE"
+    sensor_map[12] = "GPS_BEARING"
+    sensor_map[13] = "GPS_NUM_SAT_FIX"
+    sensor_map[14] = "GPS_POSITION"
+    sensor_map[15] = "GPS_SPEED"
+    sensor_map[16] = "GPS_TIME_FIRST_FIX"
+    sensor_map[17] = "GPS_UTC_TIME"
+    sensor_map[18] = "GYROSCOPE_3D"
+    sensor_map[19] = "MAGNETOMETER_3D"
+    sensor_map[20] = "PACEMAKER_EVENT"
+    sensor_map[21] = "QUATERNIONS"
+    sensor_map[22] = "RESPIRATION_1_CH"
+    sensor_map[23] = "RESPIRATION_3_CH"
+    sensor_map[24] = "TEMPERATURE"
+    sensor_map[25] = "ELECTROCARDIOGRAM_2_CH"
+    sensor_map[26] = "RESPIRATION_2_CH"
+
+    return sensor_map[sensor_proto_number]
