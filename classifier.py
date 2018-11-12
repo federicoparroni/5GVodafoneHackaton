@@ -1,10 +1,11 @@
 import numpy as np
-
+from getAngles_back import get_angles
+from getAngles_knees import get_angles_2
 # STATES:
 NOT_STARTED = 0
-NOT_IN_POSE = 1
-CORRECT_POSE = 2
-WRONG_POSE = 3
+NOT_IN_POSE = 'PLAYING'
+CORRECT_POSE = 'POSE OK'
+WRONG_POSE = 'WRONG POSE'
 
 old_data = {}
 
@@ -43,7 +44,13 @@ def get_status(data):
         if sum_sqdiff_xyz[0] < threshold_x and sum_sqdiff_xyz[2] < threshold_x:
             # check if correct pose
             old_data = data
-            return CORRECT_POSE if 1 else WRONG_POSE
+            angle_back = get_angles(data)
+            angle_knees = get_angles_2(data)
+            print(angle_back)
+            if angle_back < 70 and angle_back > 45 and angle_knees > 30 and angle_knees < 60:
+                return CORRECT_POSE
+            else:
+                return WRONG_POSE
         else:
             old_data = data
             return NOT_IN_POSE

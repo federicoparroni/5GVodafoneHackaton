@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from tkinter import Tk, filedialog
 
-
+"""
 #%% get filename
 root = Tk()
 root.withdraw()
@@ -15,18 +15,7 @@ filename='../dataset/user3_schiena.h5'
 
 h5file = h5py.File(filename)
 
-"""
-uuid = h5file.attrs['_uuid'][0]
 
-print (filename, ' → uuid ', uuid)
-try:
-	start_event_dset = h5file['EVENT']['START_SESSION']
-	start_attribute_names = list(start_event_dset.attrs)
-	for attribute_name in start_attribute_names:
-		print(attribute_name, ' → ', start_event_dset.attrs[attribute_name][0])
-except:
-	pass
-"""
 
 
 
@@ -74,3 +63,42 @@ for i in range(1, a_y.shape[0]):
 
 plt.plot(angles_filtered)
 plt.show()
+"""
+a = 0.3
+
+a_y_filtered = []
+a_z_filtered = []
+angles = []
+angles_filtered = []
+
+
+def get_angles(data):
+    global a
+    global a_y_filtered
+    global a_z_filtered
+    global angles
+    global angles_filtered
+    if len(a_y_filtered) > 0:
+        a_y_filtered.append((data["L5"])[1] * a + (1 - a) * a_y_filtered[-1])
+        a_z_filtered.append((data["L5"])[2] * a + (1 - a) * a_z_filtered[-1])
+        if len(angles) > 0:
+            if a_z_filtered[-1] > 0:
+                temp = a_y_filtered[-1] * 90 / 9.8
+            else:
+                temp = ((9.8 - (a_y_filtered[-1])) * 90 / 9.8) + 90
+            angles_filtered.append(temp*a+(1-a)*angles[-1])
+            angles.append(temp)
+            return angles_filtered[-1]
+        else:
+            if a_z_filtered[-1] > 0:
+                angles.append(a_y_filtered[-1] * 90 / 9.8)
+            else:
+                angles.append(((9.8 - (a_y_filtered[-1])) * 90 / 9.8) + 90)
+            return 80
+    else:
+        a_y_filtered.append((data["L5"])[1])
+        a_z_filtered.append((data["L5"])[2])
+        return 80
+
+
+
