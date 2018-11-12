@@ -9,9 +9,9 @@ WRONG_POSE = 3
 old_data = {}
 
 sensor_type = 'ACCELEROMETER_3D'
-sens_r = ['0x0283fdaf', '0x0281fe5f', '0x0268fc8f']
-sens_l = ['0x02a3fdaf', '0x02a1fe5f', '0x0268fe8f']
-s = sens_r+sens_l
+# sens_r = ['0x0283fdaf', '0x0281fe5f', '0x0268fc8f']
+# sens_l = ['0x02a3fdaf', '0x02a1fe5f', '0x0268fe8f']
+sens = [ 'R_FOR', 'L_FOR', 'R_ARM', 'L_ARM', 'R_SHC', 'L_SHC']
 axes = ['x', 'y', 'z']
 
 threshold_x = 30
@@ -28,13 +28,15 @@ def get_status(data):
     # compute sum of squared differences
     if len(old_data.items) > 0:
         sum_sqdiff_xyz = np.array([0, 0, 0])
-        for _, xyz in data.items():
-            curr = np.array(xyz)
-            prev = np.array(old_data)
-            
-            diff = curr - prev
-            diff_square = (diff) ** 2
-            sum_sqdiff_xyz += diff_square
+        for senspos, xyz in data.items():
+            # filter only the wanted sensor for pose classification
+            if senspos in sens:
+                curr = np.array(xyz)
+                prev = np.array(old_data)
+                
+                diff = curr - prev
+                diff_square = (diff) ** 2
+                sum_sqdiff_xyz += diff_square
         
     old_data = data
     if sum_sqdiff_xyz[0] < threshold_x:
