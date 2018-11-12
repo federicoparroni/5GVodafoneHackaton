@@ -50,6 +50,7 @@ dict =	{
     "R_SHC": []
 }
 count = 0
+count2 = 0
 for msg in consumer:
     # Parse the current protobufer message
     data_container.ParseFromString(msg.value)
@@ -123,8 +124,11 @@ for msg in consumer:
                                      protobuf_message.device_sensor_output.accelerometer_3D.y_cal,
                                      protobuf_message.device_sensor_output.accelerometer_3D.z_cal]
             if count == 9:
-                print('daaiii')
+                count2 += 1
                 count = 0
+                if count2 == 2:
+                    print(classifier.get_status(dict))
+                    count2 = 0
                 dict = {
                     "L5": [],
                     "R_THG": [],
@@ -136,20 +140,3 @@ for msg in consumer:
                     "R_ARM": [],
                     "R_SHC": []
                 }
-                #classifier.get_status()
-                
-
-
-                #if protobuf_message.device_sensor_output.sensor.position == 0x0268FE8F:
-                #    dict["L_SHC"] =
-                # if protobuf_message.device_sensor_output.sensor.position == 0x
-                #print(protobuf_message)
-                # new_data_sensor_type = sensor_code_converter(protobuf_message.device_sensor_output.sensor.type)
-                # new_data_sensor_position = protobuf_message.device_sensor_output.sensor.position
-                # this_sensor = sensor.sensor(new_data_sensor_type, new_data_sensor_position)
-                # if this_sensor == my_sensor:
-                #     my_sensor.set_data(protobuf_message.timestamp, protobuf_message.device_sensor_output)
-                #     if my_sensor.redraw():  # update plot
-                #         plt.draw()
-                #         plt.pause(0.001)
-                #a = 1
