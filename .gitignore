@@ -4,3 +4,15 @@ lib
 .vscode
 pip-selfcheck.json
 include
+
+\.idea/5GVodafoneHackaton\.iml
+
+\.idea/misc\.xml
+
+\.idea/modules\.xml
+
+\.idea/workspace\.xml
+
+\.idea/vcs\.xml
+
+__pycache__/sensor\.cpython-37\.pyc
